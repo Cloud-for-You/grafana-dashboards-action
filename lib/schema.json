@@ -2,62 +2,68 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "type": {
-      "type": "string",
-      "enum": ["helm", "json"]
-    },
-    "url": {
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
-    },
-    "values": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
+    "type": { "type": "string", "enum": ["helm"] },
+    "grafana_folder": { "type": "string" },
+    "properties": {
+      "type": "object",
+      "properties": {
+        "artifact": {
+          "type": "object",
+          "properties": {
+            "url": { "type": "string" },
+            "name": { "type": "string" },
+            "version": { "type": "string" }
           },
-          "namespace": {
-            "type": "string"
-          },
-          "team": {
-            "type": "string"
-          },
-          "grafana_folder": {
-            "type": "string"
-          },
-          "sections": {
+          "required": ["url", "name", "version"]
+        },
+        "values": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-              "cache": {
-                "type": "boolean"
-              },
-              "database": {
-                "type": "boolean"
-              },
-              "circuit_breaker": {
-                "type": "boolean"
-              },
-              "kafka_consumer": {
-                "type": "boolean"
-              },
-              "http_request": {
-                "type": "string"
+              "name": { "type": "string" },
+              "namespace": { "type": "string" },
+              "team": { "type": "string" },
+              "grafana_folder": { "type": "string" },
+              "sections": {
+                "type": "object",
+                "properties": {
+                  "cache": { "type": "boolean" },
+                  "database": { "type": "boolean" },
+                  "circuit_breaker": { "type": "boolean" },
+                  "kafka_consumer": { "type": "boolean" },
+                  "http_request": { "type": "boolean" }
+                },
+                "required": ["cache", "database", "circuit_breaker", "kafka_consumer", "http_request"]
               }
             },
-            "required": ["cache", "database", "circuit_breaker", "kafka_consumer", "http_request"]
+            "required": ["name", "namespace", "team", "grafana_folder", "sections"]
           }
-        },
-        "required": ["name", "namespace", "team", "grafana_folder", "sections"]
+        }
+      }
+    },
+    "patch": {
+      "type": "object",
+      "properties": {
+        "spec": {
+          "type": "object",
+          "properties": {
+            "datasources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "inputName": { "type": "string" },
+                  "datasourceName": { "type": "string" }
+                },
+                "required": ["inputName", "datasourceName"]
+              }
+            }
+          }
+        }
       }
     }
   },
-  "required": ["type", "url", "name", "version"],
+  "required": ["type", "grafana_folder"],
   "additionalProperties": false
 }
