@@ -10,7 +10,7 @@ function searchEnvFile(directory, fileName, result = []) {
     const stats = fs.statSync(filePath);
 
     if (stats.isDirectory()) {
-      searchFile(filePath, fileName, result);
+      searchEnvFile(filePath, fileName, result);
     } else if (stats.isFile() && file === fileName) {
       result.push(filePath);
     }
