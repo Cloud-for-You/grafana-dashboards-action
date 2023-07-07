@@ -1,1 +1,1 @@
-# grafana-dashboards-actions
+# grafana-dashboards-action
