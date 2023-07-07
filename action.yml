@@ -2,10 +2,14 @@ name: 'Grafana Dashboards k8s generator'
 description: 'Generate k8s grafanaDashboards from JSON and environment'
 inputs:
   working-directory:
-    description: "Root directory from source environment"
+    description: 'Root directory from source environment'
     required: true
+  env-file-name:
+    description: 'Filename from environments'
+    required: false
+    default: 'env.yaml'
   tmp-directory:
-    description: "Directory for output rendering k8s manifests"
+    description: 'Directory for output rendering k8s manifests'
     required: false
     default: '/tmp/k8s_manifests'
 outputs:
