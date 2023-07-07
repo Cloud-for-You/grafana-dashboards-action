@@ -10,8 +10,6 @@ try {
   const tmpDir = core.getInput('tmp-directory');
   console.log("Temporary directory k8s manifests:", tmpDir);
 
-  console.log("Current directory:", __dirname);
-
   // Set Output
   const time = (new Date()).toTimeString();
   core.setOutput('time', time);
