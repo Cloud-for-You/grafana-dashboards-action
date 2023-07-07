@@ -31,9 +31,8 @@ try {
   const foundFiles = searchEnvFile(workingDir, envFile);
 
   if (foundFiles.length > 0) {
-    console.log('Searching env files:');
     for (const file of foundFiles) {
-      console.log(file);
+      console.log("  ", file);
     }
   } else {
     console.log('Files is not found.');
