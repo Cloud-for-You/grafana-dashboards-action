@@ -7,7 +7,7 @@ const path = require('path');
 
 // Nacteme lokalni knihovny
 const envFiles = require('./lib/searchEnv');
-const renderManifests = require('./lib/renderManifests');
+const manifests = require('./lib/renderManifests');
 
 try {
   // Get Input
@@ -26,7 +26,7 @@ try {
       // spustime vykonny kod pro renderovani
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
-      renderManifests.getContentEnvFile(envFile);
+      manifests.init(envFile);
     }
   } else {
     console.log('Files is not found.');
