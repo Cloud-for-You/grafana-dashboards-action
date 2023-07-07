@@ -1,6 +1,8 @@
+// Knihovny pro nutnost behu jako github actions
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+// Potrebne knihovny
 const path = require('path');
 
 // Nacteme lokalni knihovny
