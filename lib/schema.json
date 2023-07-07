@@ -2,8 +2,62 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "name": { "type": "string" },
-    "age": { "type": "number" }
+    "type": {
+      "type": "string",
+      "enum": ["helm", "json"]
+    },
+    "url": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "grafana_folder": {
+            "type": "string"
+          },
+          "sections": {
+            "type": "object",
+            "properties": {
+              "cache": {
+                "type": "boolean"
+              },
+              "database": {
+                "type": "boolean"
+              },
+              "circuit_breaker": {
+                "type": "boolean"
+              },
+              "kafka_consumer": {
+                "type": "boolean"
+              },
+              "http_request": {
+                "type": "string"
+              }
+            },
+            "required": ["cache", "database", "circuit_breaker", "kafka_consumer", "http_request"]
+          }
+        },
+        "required": ["name", "namespace", "team", "grafana_folder", "sections"]
+      }
+    }
   },
-  "required": ["name"]
+  "required": ["type", "url", "name", "version"],
+  "additionalProperties": false
 }
