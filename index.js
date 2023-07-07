@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -22,7 +23,7 @@ function searchEnvFile(directory, fileName, result = []) {
 try {
   // Get Input
   const workingDir = core.getInput('working-directory');
-  console.log("Working directory:", workingDir); 
+  console.log("Working directory:", path.resolve(workingDir));
   const envFile = core.getInput('env-file-name');
   console.log("File from environments:", envFile);
   const tmpDir = core.getInput('tmp-directory');
@@ -30,9 +31,10 @@ try {
 
   const foundFiles = searchEnvFile(workingDir, envFile);
 
+  console.log("Found files:");
   if (foundFiles.length > 0) {
     for (const file of foundFiles) {
-      console.log("  ", file);
+      console.log(" ", file);
     }
   } else {
     console.log('Files is not found.');
