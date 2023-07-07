@@ -1,0 +1,16 @@
+name: 'Grafana Dashboards k8s generator'
+description: 'Generate k8s grafanaDashboards from JSON and environment'
+inputs:
+  working-directory:
+    description: "Root directory from source environment"
+    required: true
+  tmp-directory:
+    description: "Directory for output rendering k8s manifests"
+    required: false
+    default: '/tmp/k8s_manifests'
+outputs:
+  time:
+    description: 'The time generated'
+runs:
+  using: 'node16'
+  main: 'index.js'
