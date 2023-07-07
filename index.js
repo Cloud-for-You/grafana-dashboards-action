@@ -7,7 +7,7 @@ const path = require('path');
 
 // Nacteme lokalni knihovny
 const envFiles = require('./lib/searchEnv');
-const grafanadashboard_k8s = require('./lib/generateManifest');
+const renderManifests = require('./lib/renderManifests');
 
 try {
   // Get Input
@@ -18,15 +18,15 @@ try {
   const tmpDir = core.getInput('tmp-directory');
   console.log("Temporary directory k8s manifests:", tmpDir);
 
-  const feundEnvFiles = envFiles.getEnvFiles(workingDir, envFile);
+  const foundEnvFiles = envFiles.getEnvFiles(workingDir, envFile);
 
   console.log("Found files:");
-  if (feundEnvFiles.length > 0) {
-    for (const file of feundEnvFiles) {
+  if (foundEnvFiles.length > 0) {
+    for (const envFile of foundEnvFiles) {
       // spustime vykonny kod pro renderovani
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
-      grafanadashboard_k8s.generateManifests(file);
+      renderManifests.getManifest(envFile);
     }
   } else {
     console.log('Files is not found.');
