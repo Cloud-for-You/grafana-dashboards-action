@@ -4,21 +4,8 @@ const github = require('@actions/github');
 const fs = require('fs');
 const path = require('path');
 
-function searchEnvFile(directory, fileName, result = []) {
-  const files = fs.readdirSync(directory);
-  for (const file of files) {
-    const filePath = path.join(directory, file);
-    const stats = fs.statSync(filePath);
-
-    if (stats.isDirectory()) {
-      searchEnvFile(filePath, fileName, result);
-    } else if (stats.isFile() && file === fileName) {
-      result.push(filePath);
-    }
-  }
-
-  return result;
-}
+// Nacteme lokalni knihovny
+const files = require('./lib/files');
 
 try {
   // Get Input
@@ -29,7 +16,7 @@ try {
   const tmpDir = core.getInput('tmp-directory');
   console.log("Temporary directory k8s manifests:", tmpDir);
 
-  const foundFiles = searchEnvFile(workingDir, envFile);
+  const foundFiles = files.getFiles(workingDir, envFile);
 
   console.log("Found files:");
   if (foundFiles.length > 0) {
