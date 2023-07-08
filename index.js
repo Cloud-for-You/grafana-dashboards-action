@@ -6,27 +6,28 @@ const github = require('@actions/github');
 const path = require('path');
 
 // Nacteme lokalni knihovny
-const confFiles = require('./lib/searchConfig');
+const config = require('./lib/searchConfig');
 const manifests = require('./lib/renderManifests');
 
 try {
   // Get Input
   const workingDir = core.getInput('working-directory');
-  console.log("Working directory:", path.resolve(workingDir));
-  const confFile = core.getInput('env-file-name');
-  console.log("File from environments:", confFile);
+  const configFile = core.getInput('config-file-name');
   const tmpDir = core.getInput('tmp-directory');
+  /*
+  console.log("Working directory:", path.resolve(workingDir));
+  console.log("File from environments:", confFile);
   console.log("Temporary directory k8s manifests:", tmpDir);
-
-  const foundConfFile = confFiles.getConfFiles(workingDir, confFile);
+  */
+  const foundConfigFile = config.getConfFiles(workingDir, configFile);
 
   console.log("Found files:");
-  if (foundConfFile.length > 0) {
-    for (const confFile of foundConfFile) {
+  if (foundConfigFile.length > 0) {
+    for (const configFile of foundConfigFile) {
       // spustime vykonny kod pro renderovani
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
-      manifests.init(confFile);
+      manifests.init(configFile);
     }
   } else {
     console.log('Files is not found.');

@@ -4,10 +4,10 @@ inputs:
   working-directory:
     description: 'Root directory from source environment'
     required: true
-  env-file-name:
-    description: 'Filename from environments'
+  config-file-name:
+    description: 'Filename from configuration'
     required: false
-    default: 'env.yaml'
+    default: 'config.yaml'
   tmp-directory:
     description: 'Directory for output rendering k8s manifests'
     required: false
