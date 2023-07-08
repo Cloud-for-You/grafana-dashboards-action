@@ -19,7 +19,7 @@ try {
   console.log("File from environments:", confFile);
   console.log("Temporary directory k8s manifests:", tmpDir);
   */
-  const foundConfigFile = config.getConfFiles(workingDir, configFile);
+  const foundConfigFile = config.getConfigFiles(workingDir, configFile);
 
   console.log("Found files:");
   if (foundConfigFile.length > 0) {
