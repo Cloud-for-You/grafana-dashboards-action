@@ -6,7 +6,7 @@ const github = require('@actions/github');
 const path = require('path');
 
 // Nacteme lokalni knihovny
-const confFiles = require('./lib/searchEnv');
+const confFiles = require('./lib/searchConfig');
 const manifests = require('./lib/renderManifests');
 
 try {
@@ -18,7 +18,7 @@ try {
   const tmpDir = core.getInput('tmp-directory');
   console.log("Temporary directory k8s manifests:", tmpDir);
 
-  const foundConfFile = confFiles.getconfFiles(workingDir, confFile);
+  const foundConfFile = confFiles.getConfFiles(workingDir, confFile);
 
   console.log("Found files:");
   if (foundConfFile.length > 0) {
