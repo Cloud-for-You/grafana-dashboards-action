@@ -27,7 +27,7 @@ try {
       // spustime vykonny kod pro renderovani
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
-      manifests.init(configFile);
+      manifests.render(configFile);
     }
   } else {
     console.log('Files is not found.');
