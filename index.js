@@ -2,9 +2,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-// Potrebne knihovny
-const path = require('path');
-
 // Nacteme lokalni knihovny
 const configs = require('./lib/configs');
 const manifests = require('./lib/renderManifests');
@@ -14,11 +11,6 @@ try {
   const workingDir = core.getInput('working-directory');
   const configFile = core.getInput('config-file-name');
   const tmpDir = core.getInput('tmp-directory');
-  /*
-  console.log("Working directory:", path.resolve(workingDir));
-  console.log("File from environments:", confFile);
-  console.log("Temporary directory k8s manifests:", tmpDir);
-  */
   const foundConfigFile = configs.getConfigFiles(workingDir, configFile);
 
   console.log("Found files:");
