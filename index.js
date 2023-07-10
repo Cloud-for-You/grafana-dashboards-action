@@ -2,29 +2,59 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+const fs = require('fs');
+const path = require('path');
+
 // Nacteme lokalni knihovny
-const configs = require('./lib/configs');
-const manifests = require('./lib/renderManifests');
+const render = require('./lib/renderManifests');
+
+// Funkce
+function getConfigFiles(directory, fileName, result = []) {
+  const files = fs.readdirSync(directory);
+  for (const file of files) {
+    const filePath = path.join(directory, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isDirectory()) {
+      getConfigFiles(filePath, fileName, result);
+    } else if (stats.isFile() && file === fileName) {
+      result.push(filePath);
+    }
+  }
+  return result;
+}
 
 try {
   // Get Input
-  const workingDir = core.getInput('working-directory');
-  const configFile = core.getInput('config-file-name');
-  const tmpDir = core.getInput('tmp-directory');
-  const foundConfigFile = configs.getConfigFiles(workingDir, configFile);
+  //const workingDir = core.getInput('working-directory');
+  //const configFile = core.getInput('config-file-name');
+  //const tmpDir = core.getInput('tmp-directory');
 
-  console.log("Found files:");
+  //testovaci vstupy
+  const workingDir = '../grafana-dashboards';
+  const configFile = 'config.yaml';
+  const tmpDir = '/tmp/k8s_manifests';
+  module.exports = {debil: 10};
+
+  // Pripravime si tmp directory pokud neexistuje
+  if (!fs.existsSync(tmpDir)) {
+    fs.mkdirSync(tmpDir, { recursive: true });
+  }
+
+  const foundConfigFile = getConfigFiles(workingDir, configFile);
+
+  //console.log("Found files:");
+
   if (foundConfigFile.length > 0) {
     for (const configFile of foundConfigFile) {
       // spustime vykonny kod pro renderovani
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
-      manifests.render(configFile);
+      const k8s_manifest = render.init(workingDir, configFile, tmpDir);
     }
   } else {
-    console.log('Files is not found.');
+    console.log('Config file is not found.');
   }
-
 
   // Set Output
   const time = (new Date()).toTimeString();
