@@ -26,16 +26,17 @@ function getConfigFiles(directory, fileName, result = []) {
 
 try {
   // testovaci vstupy
-  /*
+  
   const workingDir = '../grafana-dashboards';
   const configFile = 'config.yaml';
   const tmpDir = '/tmp/k8s_manifests';
-  */
+  
   // Ziskani vstupu z github actions
+  /*
   const workingDir = core.getInput('working-directory');
   const configFile = core.getInput('config-file-name');
   const tmpDir = core.getInput('tmp-directory');
-
+  */
   
 
   // Pripravime si tmp directory pokud neexistuje
