@@ -1,10 +1,6 @@
 name: 'Grafana Dashboards k8s generator'
 description: 'Generate k8s grafanaDashboards from JSON and environment'
 inputs:
-  grafana-instance:
-    description: 'Grafana instance selector'
-    required: true
-    default: grafana
   working-directory:
     description: 'Root directory from source environment'
     required: true
