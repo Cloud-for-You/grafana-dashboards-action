@@ -3,7 +3,7 @@
 This action provides the following functionality for GitHub Actions users:
 - Recursively search all folders and if it contains a configuration file, process all dashboards and prepare them for deployment to the K8S cluster
 
-*Cluster must contain grafana-operator and its API*
+*K8S cluster must contain grafana-operator and its API*
 
 ## Usage
 ```yaml
