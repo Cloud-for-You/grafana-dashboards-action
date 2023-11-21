@@ -4,7 +4,7 @@ This action provides the following functionality for GitHub Actions users:
 - According to the settings in the folder, all JSON dashboards stored in the K8S folder will generate manifests of the kind: GrafanaDashboards
 
 ## Usage
-```
+```yaml
 - name: Generate directory to k8s manifests
   uses: Cloud-for-You/grafana-dashboards-action@main
   with:
