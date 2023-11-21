@@ -1,7 +1,9 @@
 # grafana-dashboards-action
 
 This action provides the following functionality for GitHub Actions users:
-- According to the settings in the folder, all JSON dashboards stored in the K8S folder will generate manifests of the kind: GrafanaDashboards
+- Recursively search all folders and if it contains a configuration file, process all dashboards and prepare them for deployment to the K8S cluster
+
+*Cluster must contain grafana-operator and its API*
 
 ## Usage
 ```yaml
