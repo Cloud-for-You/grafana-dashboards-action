@@ -54,7 +54,7 @@ try {
       const k8s_manifest = render.init(workingDir, configFile, tmpDir);
     }
   } else {
-    console.log('Config file is not found.');
+    console.log('Config file not found.');
   }
 
   // Set Output
