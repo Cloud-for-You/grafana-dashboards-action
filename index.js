@@ -52,6 +52,9 @@ try {
       // Scriptu, predlozime vyhledany ENV soubor, ktery si modul rozparsuje a nasledne vygeneruje
       // k8s manifesty a vlozi do nej dashboard z uvedeneho zdroje
       const k8s_manifest = render.init(workingDir, configFile, tmpDir);
+      if (k8s_manifest === false) {
+        core.setFailed(error.message)
+      }
     }
   } else {
     console.log('Config file not found.');
